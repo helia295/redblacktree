@@ -17,7 +17,15 @@ struct RBTNode {
 		this->data = data;
 		left = right = parent = nullptr;
 		this->color = COLOR_RED;
-	}
+	};
+	
+	void operator=(const RBTNode* other) {
+		data = other->data;
+		color = other->color;
+		left = other->left;
+		right = other->right;
+		parent = other->parent;
+	};
 };
 
 
@@ -28,15 +36,21 @@ class RedBlackTree {
 			root = nullptr;
 			numItems = 0;
 		};
-		RedBlackTree(const RedBlackTree& rbt);
 		
+		RedBlackTree(const RedBlackTree& rbt);
+		/*void operator=(RedBlackTree* other) const {
+			other->root = root;
+			other->numItems = numItems;
+		};*/
+		
+		~RedBlackTree();
 		
 		void Insert(int num);
 		
-		//bool Contains(int num);
-		/*int GetMin();
+		bool Contains(int num);
+		int GetMin();
 		int GetMax();
-		int Size();*/
+		int Size();
 		// ToString variants
 		string ToInfixString() const { return ToInfixString(root); };
 		string ToPrefixString() const { return ToPrefixString(root); };
@@ -55,6 +69,5 @@ class RedBlackTree {
 		void rotateLeft(RBTNode* &root, RBTNode* &newNode);
 		void rotateRight(RBTNode* &root, RBTNode* &newNode);
 		RBTNode* BSTInsert(RBTNode* root, RBTNode* newNode);
-		
 		
 };

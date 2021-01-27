@@ -162,15 +162,12 @@ RBTNode* RedBlackTree::BSTInsert(RBTNode* root, RBTNode* newNode) {
 		root->left = BSTInsert(root->left, newNode);
 		root->left->parent = root;
 		
-	} else if (newNode->data > root->data) {
+	} else if (newNode->data >= root->data) {
 		
 		root->right = BSTInsert(root->right, newNode);
 		root->right->parent = root;
 		
-	} else { //if new node = root
-		
-		throw invalid_argument("Duplicate arguments not allowed: " + to_string(newNode->data));
-	}
+	} 
 	
 	return root; //this is the root we added the new node to (the parent node)
 }
@@ -182,6 +179,7 @@ void RedBlackTree::Insert(int num) {
 	RBTNode* newNode = new RBTNode(num);
 		
 	root = BSTInsert(this->root, newNode);	
+	this->numItems++;
 	
 	//RBTconditions(root, newNode);
 	RBTNode *parentNode = nullptr;
@@ -264,23 +262,80 @@ void RedBlackTree::Insert(int num) {
 }
 
 
-/*
 bool RedBlackTree::Contains(int num) {
 	
-	RBTNode* tmp = new RBTNode(num);
-	
-	if (num < (root->data)) {
+	if (root == nullptr) { 
 		
-		while (
+		return false;
 	}
 	
+	RBTNode* ans = root;
+	
+	while (ans != nullptr) {
+		
+		if (ans->data == num) {
+			
+			return true;
+			
+		} else if (ans->data > num) {
+			
+			ans = ans->left;
+			
+		} else {
+			
+			ans = ans->right;
+		}
+	}
+	return false;
+}
+
+
+int RedBlackTree::GetMin() {
+	
+	RBTNode* ans = root;
+	
+	while (ans != nullptr) {
+		
+		if (ans->left != nullptr) {
+			
+			ans = ans->left;
+		} else {
+			return (ans->data);
+		}
+	}
+	return (ans->data);
+}
+
+
+
+int RedBlackTree::GetMax() {
+	
+	RBTNode* ans = root;
+	
+	while (ans != nullptr) {
+		
+		if (ans->right != nullptr) {
+			
+			ans = ans->right;
+		} else {
+			
+			return (ans->data);
+		}
+	}
+	return (ans->data);
+}
+
+
+int RedBlackTree::Size() {
+	
+	return this->numItems;
 }
 
 
 
 RedBlackTree::RedBlackTree(const RedBlackTree& rbt){
 	
-	rbt = this;
+	rbt.root = this->root;
 }
-*/
+
 
