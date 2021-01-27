@@ -1,20 +1,22 @@
 #define COLOR_RED 0
 #define COLOR_BLACK 1
+
 #include <iostream>
 
 using namespace std;
 
 struct RBTNode {
+	RBTNode* left;
+	RBTNode* right;
+	RBTNode* parent;
 	int data;
-	unsigned short int color;
-	RBTNode* left = nullptr;
-	RBTNode* right = nullptr;
-	RBTNode* parent = nullptr;
-	// Constructor
-	RBTNode(int data){
+	int color;
+	
+	//constructor
+	RBTNode(int data) {
 		this->data = data;
 		left = right = parent = nullptr;
-		this->color = COLOR_BLACK;
+		this->color = COLOR_RED;
 	}
 };
 
@@ -22,27 +24,37 @@ struct RBTNode {
 class RedBlackTree {
 	
 	public:
-		RedBlackTree();
+		RedBlackTree() {
+			root = nullptr;
+			numItems = 0;
+		};
 		RedBlackTree(const RedBlackTree& rbt);
+		
+		
 		void Insert(int num);
-		void BSTInsert (RBTNode* rn);
-	//	bool Contains(int num);
-	//	int GetMin();
-	//	int GetMax();
-	//	int Size();
-		bool isLeaf(RBTNode* node) const;
-		bool hasLeft(RBTNode* node) const;
-		bool hasRight(RBTNode* node) const;
-		RBTNode* ParentOf(RBTNode* node);
-		string getColor(RBTNode* node) const;
+		
+		//bool Contains(int num);
+		/*int GetMin();
+		int GetMax();
+		int Size();*/
 		// ToString variants
 		string ToInfixString() const { return ToInfixString(root); };
 		string ToPrefixString() const { return ToPrefixString(root); };
-
-	//	string ToPostfixString() const { return ToPostfixString(root); };
+		string ToPostfixString() const { return ToPostfixString(root); };
+	
 	private:
-		string ToInfixString (RBTNode* node) const;
-		string ToPrefixString (RBTNode* node) const;
-		unsigned long long int numItems;
+	
 		RBTNode* root;
+		unsigned long long int numItems;
+	
+		string getColorNode(RBTNode* node) const;
+		string ToInfixString(RBTNode* node) const;
+		string ToPrefixString(RBTNode* node) const;
+		string ToPostfixString(RBTNode* node) const;
+		
+		void rotateLeft(RBTNode* &root, RBTNode* &newNode);
+		void rotateRight(RBTNode* &root, RBTNode* &newNode);
+		RBTNode* BSTInsert(RBTNode* root, RBTNode* newNode);
+		
+		
 };
