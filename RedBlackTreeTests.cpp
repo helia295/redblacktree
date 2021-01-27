@@ -129,6 +129,16 @@ void TestInsertRandomTests(){
 	rbt->Insert(13);
 	rbt->Insert(20);
 	rbt->Insert(12);
+	
+	try {
+		
+		rbt->Insert(15);
+		assert(false);
+		
+	} catch( const invalid_argument& e ) {
+		//cout << e.what() << endl;
+	}
+	
 	cout << endl;
 	//cout << "tree: " << rbt->ToInfixString() << endl;
 	delete rbt;
@@ -143,10 +153,30 @@ void TestInsertRandomTests(){
 	//cout << "tree: "  << rbt->ToInfixString() << endl;
 	rbt->Insert(15);
 	//cout << "tree: "  << rbt->ToInfixString() << endl;
+	
+	try {
+		
+		rbt->Insert(15);
+		assert(false);
+		
+	} catch( const invalid_argument& e ) {
+		//cout << e.what() << endl;
+	}
+	
 	rbt->Insert(5);
 	//cout << "tree: "  << rbt->ToInfixString() << endl;
 	rbt->Insert(13);
 	//cout << "tree: "  << rbt->ToInfixString() << endl;
+	
+	try {
+		
+		rbt->Insert(12);
+		assert(false);
+		
+	} catch( const invalid_argument& e ) {
+		//cout << e.what() << endl;
+	}
+	
 	rbt->Insert(7);
 	//cout << "tree: "  << rbt->ToInfixString() << endl;
 	delete rbt;
@@ -233,9 +263,27 @@ void TestGetMinimumMaximum(){
 	
 	RedBlackTree *rbt = new RedBlackTree();
 	
+	try {
+		
+		rbt->GetMax();
+		assert(false);
+		
+	} catch( const invalid_argument& e ) {
+		//cout << e.what() << endl;
+	}
+	
+	try {
+		
+		rbt->GetMin();
+		assert(false);
+		
+	} catch( const invalid_argument& e ) {
+		//cout << e.what() << endl;
+	}
+	
 	rbt->Insert(40);
 	rbt->Insert(22);
-	rbt->Insert(12);
+	rbt->Insert(32);
 	rbt->Insert(11);
 	rbt->Insert(15);
 	rbt->Insert(31);
@@ -245,20 +293,18 @@ void TestGetMinimumMaximum(){
 	//cout << "Min: " << rbt->GetMin() << endl;
 	assert(rbt->GetMin() == 11);
 	
-	rbt->Insert(55);
-	rbt->Insert(40);
-	rbt->Insert(12);
+	rbt->Insert(155);
+	rbt->Insert(41);
+	rbt->Insert(2);
 	rbt->Insert(17);
 	rbt->Insert(29);
-	rbt->Insert(40);
 	rbt->Insert(34);
-	rbt->Insert(55);
-	rbt->Insert(12);
+	rbt->Insert(45);
 	
 	//cout << "Max: " << rbt->GetMax() << endl;
-	assert(rbt->GetMax() == 55);
+	assert(rbt->GetMax() == 155);
 	//cout << "Min: " << rbt->GetMin() << endl;
-	assert(rbt->GetMin() == 11);
+	assert(rbt->GetMin() == 2);
 	
 	delete rbt;
 	cout << "PASSED!" << endl << endl;
@@ -285,7 +331,7 @@ void TestSize(){
 	rbt->Insert(12);
 	rbt->Insert(17);
 	rbt->Insert(29);
-	rbt->Insert(12);
+	rbt->Insert(112);
 	rbt->Insert(34);
 	
 	//cout << "Size: " << rbt->Size() << endl;

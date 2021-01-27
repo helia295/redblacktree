@@ -211,12 +211,16 @@ RBTNode* RedBlackTree::BSTInsert(RBTNode* root, RBTNode* newNode) {
 		root->left = BSTInsert(root->left, newNode);
 		root->left->parent = root;
 		
-	} else if (newNode->data >= root->data) {
+	} else if (newNode->data > root->data) {
 		
 		root->right = BSTInsert(root->right, newNode);
 		root->right->parent = root;
 		
-	} 
+	} else {
+		
+		delete newNode;
+		throw invalid_argument("Duplicate arguments not allowed: " + to_string(newNode->data));
+	}
 	
 	return root;
 }
@@ -345,6 +349,11 @@ int RedBlackTree::GetMin() {
 	
 	RBTNode* ans = root;
 	
+	if (ans == nullptr) {
+		
+		throw invalid_argument("Tree is empty, cannot find min!");
+	}
+	
 	// this goes to the far left to find the minimum node
 	while (ans != nullptr) {
 		
@@ -366,6 +375,11 @@ int RedBlackTree::GetMin() {
 int RedBlackTree::GetMax() {
 	
 	RBTNode* ans = root;
+	
+	if (ans == nullptr) {
+		
+		throw invalid_argument("Tree is empty, cannot find max!");
+	}
 	
 	//this goes to the far right to find maximum node
 	while (ans != nullptr) {
