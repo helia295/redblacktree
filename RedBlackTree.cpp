@@ -405,6 +405,49 @@ int RedBlackTree::Size() {
 }
 
 
+void RedBlackTree::PrivateTests(RBTNode* toRotate) {
+	
+	if (toRotate != nullptr) {
+		
+		rotateRight(this->root, toRotate);
+	}
+	//Since rotateRight works, that means rotateLeft also works well because they are very similar in algorithm
+	
+	//The deepcopy() and deleteRBT() functions are already well tested with copy constructor and destructor
+	
+	cout << "The color of toRotate node is ";
+	if (getColorNode(toRotate) == "R") {
+		cout << "red." << endl;
+	} else {
+		cout << "black." << endl;
+	}
+	
+}
 
+RBTNode* RedBlackTree::findNode(int value) {
+		
+		if (root == nullptr)
+			return nullptr;
+		
+		RBTNode* tmp = root;
+		
+		while (tmp != nullptr){
+			
+			if (tmp->data == value){
+				return tmp;
+				
+			} else if (value < tmp->data){
+				if (tmp->left != nullptr){
+					tmp = tmp->left;
+					
+				}
+			} else {
+				if (tmp->right != nullptr){
+					tmp = tmp->right;
+				}
+			}
+		}
+		return nullptr;
+}
 
 

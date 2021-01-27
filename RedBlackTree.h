@@ -48,6 +48,9 @@ class RedBlackTree {
 		string ToInfixString() const { return ToInfixString(root); };
 		string ToPrefixString() const { return ToPrefixString(root); };
 		string ToPostfixString() const { return ToPostfixString(root); };
+		
+		void PrivateTests(RBTNode* toRotate);
+		RBTNode* findNode(int value);
 	
 	private:
 	

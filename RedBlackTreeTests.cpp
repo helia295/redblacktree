@@ -342,6 +342,38 @@ void TestSize(){
 }
 
 
+void PrivateTests() { 
+	
+	cout << "Testing left rotate..." << endl;
+	
+	RedBlackTree *rbt = new RedBlackTree();
+	
+	rbt->Insert(10);
+	rbt->Insert(7);
+	rbt->Insert(15);
+	rbt->Insert(5);
+	rbt->Insert(8);
+	rbt->Insert(2);
+	rbt->Insert(6);
+	
+	RBTNode* toRotate = rbt->findNode(7);
+	
+	//cout << "rbt: " << rbt->ToPrefixString() << endl;
+	assert(rbt->ToPrefixString() == " B10  R7  B5  R2  R6  B8  B15 ");
+	
+	rbt->PrivateTests(toRotate);
+	
+	//cout << "rbt: " << rbt->ToPrefixString() << endl;
+	assert(rbt->ToPrefixString() == " B10  B5  R2  R7  R6  B8  B15 ");
+	
+	delete rbt;
+	
+	cout << "PASSED!" << endl << endl;
+	
+}
+
+
+
 int main(){
 
 	
@@ -361,6 +393,8 @@ int main(){
 	TestContains();
 	TestGetMinimumMaximum();
 	TestSize();
+	
+	PrivateTests();
 
 	
 	cout << "ALL TESTS PASSED!!" << endl;
