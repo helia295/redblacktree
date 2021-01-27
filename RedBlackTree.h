@@ -6,9 +6,9 @@
 using namespace std;
 
 struct RBTNode {
-	RBTNode* left = nullptr;
-	RBTNode* right = nullptr;
-	RBTNode* parent = nullptr;
+	RBTNode* left;
+	RBTNode* right;
+	RBTNode* parent;
 	int data;
 	int color;
 	
@@ -16,8 +16,16 @@ struct RBTNode {
 	RBTNode(int data) {
 		this->data = data;
 		left = right = parent = nullptr;
-		this->color = COLOR_BLACK;
-	}
+		this->color = COLOR_RED;
+	};
+	
+	void operator=(const RBTNode* other) {
+		data = other->data;
+		color = other->color;
+		left = other->left;
+		right = other->right;
+		parent = other->parent;
+	};
 };
 
 
@@ -28,15 +36,21 @@ class RedBlackTree {
 			root = nullptr;
 			numItems = 0;
 		};
-		RedBlackTree(const RedBlackTree& rbt);
 		
+		RedBlackTree(const RedBlackTree& rbt);
+		/*void operator=(RedBlackTree* other) const {
+			other->root = root;
+			other->numItems = numItems;
+		};*/
+		
+		~RedBlackTree();
 		
 		void Insert(int num);
-		/*
+		
 		bool Contains(int num);
 		int GetMin();
 		int GetMax();
-		int Size();*/
+		int Size();
 		// ToString variants
 		string ToInfixString() const { return ToInfixString(root); };
 		string ToPrefixString() const { return ToPrefixString(root); };
@@ -52,6 +66,11 @@ class RedBlackTree {
 		string ToPrefixString(RBTNode* node) const;
 		string ToPostfixString(RBTNode* node) const;
 		
-		RBTNode* InsertHelper(RBTNode* root, RBTNode* newNode);
+		void rotateLeft(RBTNode* &root, RBTNode* &newNode);
+		void rotateRight(RBTNode* &root, RBTNode* &newNode);
+		RBTNode* BSTInsert(RBTNode* root, RBTNode* newNode);
+		
+		RBTNode* deepcopy(RBTNode* nd);
+		void deleteRBT(RBTNode* curr);
 		
 };
