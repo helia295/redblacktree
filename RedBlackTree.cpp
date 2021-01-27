@@ -1,8 +1,57 @@
 #include "RedBlackTree.h"
 #include <iostream>
-#include <sstream>
+#include <string>
 
 using namespace std;
+
+
+
+RedBlackTree::RedBlackTree(const RedBlackTree& rbt) {
+	
+	root = deepcopy(rbt.root);
+
+}
+
+
+RBTNode* RedBlackTree::deepcopy(RBTNode* nd){
+
+	if (nd == nullptr) {
+		return nullptr;
+	} 
+	RBTNode* newNode = new RBTNode(nd->data);
+	newNode->data = nd->data;
+	newNode->color = nd->color;
+	newNode->left = nd->left;
+	newNode->right = nd->right;
+	newNode->parent = nd->parent;
+
+	newNode->left = deepcopy(nd->left);
+
+	newNode->right = deepcopy(nd->right);
+	
+	return newNode;
+}
+
+
+RedBlackTree::~RedBlackTree() {
+	
+	deleteRBT(root);
+	
+}
+
+
+void RedBlackTree::deleteRBT(RBTNode* curr){
+
+	if(curr!=nullptr){
+
+		deleteRBT(curr->left);
+
+		deleteRBT(curr->right);
+
+		delete curr;
+	}
+
+}
 
 
 string RedBlackTree::getColorNode(RBTNode* node) const {
@@ -148,7 +197,7 @@ void RedBlackTree::rotateLeft(RBTNode* &root, RBTNode* &aNode) {
 }
 
 
-
+/* This performs the same type of insertion with Binary search tree */
 RBTNode* RedBlackTree::BSTInsert(RBTNode* root, RBTNode* newNode) {
 	
 	//if tree is empty, return new node
@@ -169,11 +218,12 @@ RBTNode* RedBlackTree::BSTInsert(RBTNode* root, RBTNode* newNode) {
 		
 	} 
 	
-	return root; //this is the root we added the new node to (the parent node)
+	return root;
 }
 
 
 
+/* This performs Red Black tree insertion */
 void RedBlackTree::Insert(int num) {
 	
 	RBTNode* newNode = new RBTNode(num);
@@ -271,6 +321,7 @@ bool RedBlackTree::Contains(int num) {
 	
 	RBTNode* ans = root;
 	
+	// this traverses the whole tree
 	while (ans != nullptr) {
 		
 		if (ans->data == num) {
@@ -294,6 +345,7 @@ int RedBlackTree::GetMin() {
 	
 	RBTNode* ans = root;
 	
+	// this goes to the far left to find the minimum node
 	while (ans != nullptr) {
 		
 		if (ans->left != nullptr) {
@@ -315,6 +367,7 @@ int RedBlackTree::GetMax() {
 	
 	RBTNode* ans = root;
 	
+	//this goes to the far right to find maximum node
 	while (ans != nullptr) {
 		
 		if (ans->right != nullptr) {
@@ -338,54 +391,6 @@ int RedBlackTree::Size() {
 }
 
 
-void RedBlackTree::deleteRBT(RBTNode* curr){
-
-	if(curr!=nullptr){
-
-		deleteRBT(curr->left);
-
-		deleteRBT(curr->right);
-
-		delete curr;
-	}
-
-}
 
 
-RedBlackTree::~RedBlackTree() {
-	
-	deleteRBT(root);
-	
-	
-}
-
-
-RedBlackTree::RedBlackTree(const RedBlackTree& rbt) {
-	
-	root = deepcopy(rbt.root);
-
-}
-
-
-RBTNode* RedBlackTree::deepcopy(RBTNode* nd){
-
-	//RBTNode* nnode = nullptr;
-
-	if (nd == nullptr) {
-		return nullptr;
-	} 
-	RBTNode* newNode = nullptr;
-	/*newNode->data = nd->data;
-	newNode->color = nd->color;
-	newNode->left = nd->left;
-	newNode->right = nd->right;
-	newNode->parent = nd->parent;*/
-	newNode = nd;
-
-	newNode->left = deepcopy(nd->left);
-
-	newNode->right = deepcopy(nd->right);
-	
-	return newNode;
-}
 

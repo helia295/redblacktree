@@ -164,7 +164,7 @@ void TestInsertRandomTests(){
 	
 	cout << "PASSED!" << endl << endl;
 }
-/*
+
 void TestCopyConstructor(){
 	cout << "Testing Copy Constructor..." << endl;
 
@@ -182,18 +182,21 @@ void TestCopyConstructor(){
 
 	assert(rbt2.ToPrefixString() == rbt1.ToPrefixString());
 	
-	cout << rbt2.ToPrefixString() << endl;
+	//cout << rbt2.ToPrefixString() << endl;
 	//cout << rbt1.ToPrefixString() << endl;
 	
 	rbt1.Insert(200);
-	cout << rbt2.ToPrefixString() << endl;
-	cout << rbt1.ToPrefixString() << endl;
+	//cout << rbt2.ToPrefixString() << endl;
+	//cout << rbt1.ToPrefixString() << endl;
 	assert(rbt2.ToPrefixString() != rbt1.ToPrefixString());
+	
+	rbt2.Insert(200);
+	assert(rbt2.ToPrefixString() == rbt1.ToPrefixString());
 
 	cout << "PASSED!" << endl << endl;
 }
 
-*/
+
 
 
 
@@ -233,13 +236,14 @@ void TestGetMinimumMaximum(){
 	rbt->Insert(40);
 	rbt->Insert(22);
 	rbt->Insert(12);
+	rbt->Insert(11);
 	rbt->Insert(15);
 	rbt->Insert(31);
 	
 	//cout << "Max: " << rbt->GetMax() << endl;
 	assert(rbt->GetMax() == 40);
 	//cout << "Min: " << rbt->GetMin() << endl;
-	assert(rbt->GetMin() == 12);
+	assert(rbt->GetMin() == 11);
 	
 	rbt->Insert(55);
 	rbt->Insert(40);
@@ -254,7 +258,7 @@ void TestGetMinimumMaximum(){
 	//cout << "Max: " << rbt->GetMax() << endl;
 	assert(rbt->GetMax() == 55);
 	//cout << "Min: " << rbt->GetMin() << endl;
-	assert(rbt->GetMin() == 12);
+	assert(rbt->GetMin() == 11);
 	
 	delete rbt;
 	cout << "PASSED!" << endl << endl;
@@ -306,7 +310,7 @@ int main(){
 	TestToStrings();
 	TestInsertRandomTests();
 
-	//TestCopyConstructor();
+	TestCopyConstructor();
 
 	TestContains();
 	TestGetMinimumMaximum();

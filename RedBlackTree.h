@@ -1,3 +1,7 @@
+
+#ifndef RBT_H
+#define RBT_H
+
 #define COLOR_RED 0
 #define COLOR_BLACK 1
 
@@ -19,13 +23,6 @@ struct RBTNode {
 		this->color = COLOR_RED;
 	};
 	
-	void operator=(const RBTNode* other) {
-		data = other->data;
-		color = other->color;
-		left = other->left;
-		right = other->right;
-		parent = other->parent;
-	};
 };
 
 
@@ -38,10 +35,6 @@ class RedBlackTree {
 		};
 		
 		RedBlackTree(const RedBlackTree& rbt);
-		/*void operator=(RedBlackTree* other) const {
-			other->root = root;
-			other->numItems = numItems;
-		};*/
 		
 		~RedBlackTree();
 		
@@ -74,3 +67,6 @@ class RedBlackTree {
 		void deleteRBT(RBTNode* curr);
 		
 };
+
+
+#endif
